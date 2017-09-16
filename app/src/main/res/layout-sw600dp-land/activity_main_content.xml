@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/split"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+
+        <fragment
+            android:id="@+id/fragment_main_container"
+            android:name="com.example.codepath.moviestmbd.fragments.MainFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_main" />
+
+        <View
+            android:background="#bdbdbd"
+            android:layout_width="1dp"
+            android:layout_height="wrap_content">
+
+        </View>
+
+        <LinearLayout
+            android:id="@+id/content_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/movie_detail_title"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                tools:text="Movie Title"
+                />
+
+            <android.support.design.widget.CoordinatorLayout
+                android:id="@+id/root_coordinator"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <FrameLayout
+                    android:id="@+id/fragment_detail_container"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" />
+
+            </android.support.design.widget.CoordinatorLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
