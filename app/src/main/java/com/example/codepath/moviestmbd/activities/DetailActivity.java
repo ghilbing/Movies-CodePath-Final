@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.transition.Explode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -77,6 +78,13 @@ public class DetailActivity extends AppCompatActivity {
         Picasso.with(this).load(mMovie.getBackdropUrl(screenWith)).into(backdrop);
         toolbarLayout.setTitle(mMovie.getTitle());
 
+        setupTransition();
+
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setupTransition() {
+        getWindow().setEnterTransition(new Explode());
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)

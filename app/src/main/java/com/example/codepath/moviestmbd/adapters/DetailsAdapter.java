@@ -1,5 +1,6 @@
 package com.example.codepath.moviestmbd.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.codepath.moviestmbd.R;
+import com.example.codepath.moviestmbd.activities.DetailActivity;
+import com.example.codepath.moviestmbd.activities.YTPlayerActivity;
 import com.example.codepath.moviestmbd.model.Movie;
 import com.example.codepath.moviestmbd.model.Review;
 import com.example.codepath.moviestmbd.model.Video;
@@ -141,7 +144,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (mMovie == null)
             return -1;
 
-        if(position ==0){
+        if(position == 0){
             viewType = HEAD;
         }else if(position < videos.size() + 1){
             viewType = TRAILER;
@@ -189,7 +192,13 @@ public class DetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             Uri url = videos.get(getAdapterPosition() - 1).getYoutubeURL();
             String key = videos.get(getAdapterPosition() -1).getKey();
             Log.d(TAG, "Play url: " + url);
-            context.startActivity(new Intent(Intent.ACTION_VIEW, url));
+           // context.startActivity(new Intent(Intent.ACTION_VIEW, url));
+
+            Intent intent = new Intent(context, YTPlayerActivity.class);
+            intent.putExtra(YTPlayerActivity.EXTRA_KEY, key);
+
+
+            context.startActivity(intent);
         }
     }
 

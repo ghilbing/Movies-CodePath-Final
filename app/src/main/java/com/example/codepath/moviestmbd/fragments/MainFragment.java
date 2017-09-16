@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -44,9 +45,12 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
     static final String LOG_TAG = MainFragment.class.getSimpleName();
     static final String EXTRA_MOVIES = "movies";
 
+    Movie mMovie;
+
 
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
+
 
     MovieApiDB movieApiDB;
     MoviesAdapter mAdapter;
@@ -82,10 +86,11 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
 
 
 
-        mAdapter = new MoviesAdapter(getContext());
+        mAdapter = new MoviesAdapter(getContext(), mMovie);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setData(movies);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
 
 
         movieApiDB = MovieApiDB.getInstance(getString(R.string.api_key));
@@ -99,6 +104,11 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
 
         return view;
 
+    }
+
+    private void loadPage(int page){
+        movieApiDB.requestPopularMovies(page, this);
+        return;
     }
 
 
@@ -121,7 +131,8 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
 
     @Override
     public void onSaveInstanceState(Bundle bundle){
-        bundle.putParcelableArrayList(EXTRA_MOVIES, mAdapter.mMovieList);
+       bundle.putParcelableArrayList(EXTRA_MOVIES, mAdapter.mMovieList);
+
         super.onSaveInstanceState(bundle);
     }
 
@@ -158,4 +169,6 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
+
+
 }

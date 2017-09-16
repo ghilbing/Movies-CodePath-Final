@@ -1,6 +1,7 @@
 package com.example.codepath.moviestmbd.activities;
 
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +23,7 @@ import com.example.codepath.moviestmbd.R;
 import com.example.codepath.moviestmbd.adapters.MoviesAdapter;
 import com.example.codepath.moviestmbd.fragments.DetailFragment;
 import com.example.codepath.moviestmbd.fragments.MainFragment;
+
 import com.example.codepath.moviestmbd.model.Movie;
 import com.example.codepath.moviestmbd.model.Review;
 import com.example.codepath.moviestmbd.rest.ErrorApi;
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
     public static final String EXTRA_MOVIE = "movie";
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String TAG_DETAIL = "fragment_detail";
-    public static String SORT = "sort";
+
 
 
     MovieApiDB movieApiDB;
@@ -158,15 +160,15 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
     public void onMovieSelected(Movie selection, boolean onClick, View view) {
 
 
-       mSelectedMovie = selection;
+        mSelectedMovie = selection;
 
-        if(isTwoPane) {
+        if (isTwoPane) {
             DetailFragment fragment = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_detail_container);
 
-            if(fragment != null & selection == null){
+            if (fragment != null & selection == null) {
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.remove(fragment).commit();
-            } else if (fragment == null || fragment.getId() != mSelectedMovie.getId()){
+            } else if (fragment == null || fragment.getId() != mSelectedMovie.getId()) {
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(DetailFragment.EXTRA_MOVIE, selection);
                 fragment = DetailFragment.newInstance(selection);
@@ -174,20 +176,23 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
 
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_detail_container, fragment, TAG_DETAIL).commit();
-
+                if (view != null) {
+                    ft.addSharedElement(view, getResources().getString(R.string.transitionPoster));
                 }
+            }
 
-            String title = selection == null ? "": selection.getTitle();
-            TextView titleDetail = (TextView) findViewById(R.id.movie_detail_title);
-            titleDetail.setText(title);
+                String title = selection == null ? "" : selection.getTitle();
+                TextView titleDetail = (TextView) findViewById(R.id.movie_detail_title);
+                titleDetail.setText(title);
 
 
-        }else if (onClick) {
-            onMovieClicked(selection, true, view);
+            } else if (onClick) {
+                onMovieClicked(selection, true, view);
             /*Intent intent = new Intent(this, DetailActivity.class);
             intent.putExtra(DetailActivity.EXTRA_MOVIE, selection);
             this.startActivity(intent);
             Log.d(LOG_TAG, "Starting activity");*/
+
         }
     }
 
@@ -197,8 +202,11 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(DetailActivity.EXTRA_MOVIE, movie);
 
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, (View) view, getResources().getString(R.string.transitionPoster));
+        ActivityCompat.startActivity(this, intent, options.toBundle());
 
-        this.startActivity(intent);
+
+       // this.startActivity(intent);
 
     }
 

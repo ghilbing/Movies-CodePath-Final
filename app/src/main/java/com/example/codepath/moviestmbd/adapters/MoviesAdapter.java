@@ -22,6 +22,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+
 import static java.util.Collections.addAll;
 
 /**
@@ -32,11 +33,14 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     public ArrayList<Movie> mMovieList = new ArrayList<>();
     private Context context;
+    private Movie mMovie;
 
     int maxPages = -1;
     int pageSize = 20;
 
-    public MoviesAdapter(Context context) {
+
+    public MoviesAdapter(Context context, Movie movie) {
+        this.mMovie = movie;
         this.context = context;
     }
 
@@ -48,6 +52,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     public void appendData(List<Movie> movies) {
+        this.clearData();
         this.mMovieList.addAll(movies);
         this.notifyDataSetChanged();
     }
@@ -60,9 +65,16 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         }
     }
 
+    public void clearData() {
+        this.maxPages = -1;
+        this.mMovieList.clear();
+        this.notifyDataSetChanged();
+    }
+
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_movie, parent, false);
@@ -70,17 +82,33 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
     }
 
+    @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
 
 
         Movie movie = mMovieList.get(position);
-        holder.title.setText(movie.getTitle());
+
+
+        MovieViewHolder movieViewHolder = (MovieViewHolder) holder;
+        int screenWith = context.getResources().getDisplayMetrics().widthPixels;
+        Picasso.with(movieViewHolder.poster.getContext())
+                .load(movie.getPosterUrl(screenWith))
+                .placeholder(R.drawable.ic_local_movies_gray)
+                .into(movieViewHolder.poster);
+        movieViewHolder.title.setText(movie.getTitle());
+
+
+    }
+
+
+
+        /*holder.title.setText(movie.getTitle());
         Picasso.with(holder.poster.getContext())
                 .load(movie.getPosterUrl())
                 .placeholder(R.drawable.ic_local_movies_gray)
                 .error(R.drawable.ic_local_movies_gray)
-                .into(holder.poster);
-    }
+                .into(holder.poster);*/
+
 
     @Override
     public int getItemCount() {
@@ -104,7 +132,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         public void onClick(View view) {
             int position = getLayoutPosition();
             Movie movie = mMovieList.get(position);
-          //  Toast.makeText(context, title.getText(), Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(context, title.getText(), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(context, DetailActivity.class);
             intent.putExtra(DetailActivity.EXTRA_MOVIE, movie);
@@ -114,5 +142,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         }
     }
 }
+
+
+
+
+
+
 
 
