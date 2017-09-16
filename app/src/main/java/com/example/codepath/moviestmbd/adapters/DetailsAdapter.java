@@ -48,6 +48,10 @@ public class DetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     List<Review> reviews = new ArrayList<>();
     List<Video> videos = new ArrayList<>();
 
+    public DetailsAdapter(Context context) {
+        this.context = context;
+    }
+
     public void setReviews(List<Review> reviews){
         this.reviews.clear();
         this.reviews.addAll(reviews);
@@ -60,9 +64,6 @@ public class DetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.notifyDataSetChanged();
     }
 
-    public Uri getFirstVideoUri(){
-        return !videos.isEmpty() ? videos.get(0).getYoutubeURL() : null;
-    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -75,6 +76,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             case HEAD:
                 View headView = inflater.inflate(R.layout.item_head, parent, false);
                 holder = new HeadViewHolder(headView);
+                break;
 
             case TRAILER:
                 View videoView = inflater.inflate(R.layout.item_video, parent, false);

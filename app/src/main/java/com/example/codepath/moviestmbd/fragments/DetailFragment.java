@@ -79,7 +79,7 @@ public class DetailFragment extends Fragment implements MovieApiDB.ReviewListene
         View view = inflater.inflate(R.layout.fragment_detail, null);
         ButterKnife.bind(this, view);
 
-        mAdapter = new DetailsAdapter();
+        mAdapter = new DetailsAdapter(getContext());
 
         movieApiDB = MovieApiDB.getInstance(getString(R.string.api_key));
         if(mMovie != null){
