@@ -2,6 +2,8 @@ package com.example.codepath.moviestmbd.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -10,8 +12,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.codepath.moviestmbd.R;
 import com.example.codepath.moviestmbd.adapters.MoviesAdapter;
@@ -37,6 +43,7 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
 
     static final String LOG_TAG = MainFragment.class.getSimpleName();
     static final String EXTRA_MOVIES = "movies";
+
 
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -67,9 +74,13 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
 
         ArrayList<Movie> movies = new ArrayList<>();
 
+        setHasOptionsMenu(true);
+
         if(savedInstanceState != null){
             movies = savedInstanceState.getParcelableArrayList(EXTRA_MOVIES);
         }
+
+
 
         mAdapter = new MoviesAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
@@ -80,13 +91,17 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
         movieApiDB = MovieApiDB.getInstance(getString(R.string.api_key));
 
         if(mAdapter.getItemCount() == 0){
+
             movieApiDB.requestPopularMovies(this);
         }
 
+        checkNetwork();
 
         return view;
 
     }
+
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -128,5 +143,19 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
     @Override
     public void error(ErrorApi errorApi) {
 
+    }
+
+    private boolean checkNetwork() {
+        if (!isNetworkAvailable()) {
+            Toast.makeText(getActivity(), "Network unavailable (check your connection)", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 }

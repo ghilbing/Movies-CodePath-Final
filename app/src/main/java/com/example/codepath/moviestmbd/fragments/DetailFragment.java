@@ -1,5 +1,7 @@
 package com.example.codepath.moviestmbd.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -9,11 +11,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.codepath.moviestmbd.R;
 import com.example.codepath.moviestmbd.adapters.DetailsAdapter;
@@ -50,6 +56,8 @@ public class DetailFragment extends Fragment implements MovieApiDB.ReviewListene
 
     @Bind(R.id.recycler)
     RecyclerView mRecyclerView;
+
+    MenuItem mShare;
 
     public static DetailFragment newInstance(Movie movie){
         DetailFragment fragment = new DetailFragment();
@@ -92,9 +100,41 @@ public class DetailFragment extends Fragment implements MovieApiDB.ReviewListene
 
         }
 
+        setHasOptionsMenu(true);
+
         return view;
 
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        getActivity().getMenuInflater().inflate(R.menu.menu_detail_fragment, menu);
+        mShare = menu.findItem(R.id.menu_item_share);
+        mShare.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                shareVideo();
+                return true;
+            }
+        });
+
+    }
+
+    private void shareVideo() {
+
+        Uri url = mAdapter.getFirstTrailerUri();
+        if (url != null) {
+            Intent shareIntent = new Intent();
+            shareIntent.setType("text/plain");
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.subject_prefix_share_action) + mMovie.getTitle());
+            shareIntent.putExtra(Intent.EXTRA_TEXT, url.toString());
+            startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.title_share_action)));
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.no_trailer_share_actiton) + mMovie.getTitle(), Toast.LENGTH_LONG).show();
+        }
+    }
+
 
     @Override
     public void success(VideoResponse response) {

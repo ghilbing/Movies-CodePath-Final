@@ -65,6 +65,10 @@ public class DetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         this.notifyDataSetChanged();
     }
 
+    public Uri getFirstTrailerUri() {
+        return !videos.isEmpty() ? videos.get(0).getYoutubeURL() : null;
+    }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

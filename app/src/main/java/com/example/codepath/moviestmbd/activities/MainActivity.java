@@ -11,9 +11,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.codepath.moviestmbd.R;
 import com.example.codepath.moviestmbd.adapters.MoviesAdapter;
@@ -34,7 +37,9 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static android.webkit.ConsoleMessage.MessageLevel.LOG;
+import static java.lang.String.valueOf;
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnMovieListener,
         MovieApiDB.MovieListener, MovieApiDB.ReviewListener, MovieApiDB.MovieListListener, MovieApiDB.VideoListener {
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
     public static final String EXTRA_MOVIE = "movie";
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private static final String TAG_DETAIL = "fragment_detail";
+    public static String SORT = "sort";
 
 
     MovieApiDB movieApiDB;
@@ -115,14 +121,16 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
     }
 
 
+
+
     @Override
     public void success(MovieResponse response) {
-        Log.i("MovieResponse", String.valueOf(response));
+        Log.i("MovieResponse", valueOf(response));
     }
 
     @Override
     public void success(MovieListResponse response) {
-        Log.i("MovieListResponse", String.valueOf(response));
+        Log.i("MovieListResponse", valueOf(response));
        // movies = response.getMovies();
        // mAdapter.setMovieList(response.getMovies());
     }
@@ -130,19 +138,19 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
 
     @Override
     public void success(VideoResponse response) {
-        Log.i("VideoResponse", String.valueOf(response));
+        Log.i("VideoResponse", valueOf(response));
     }
 
 
     @Override
     public void success(ReviewResponse response) {
-        Log.i("ReviewResponse", String.valueOf(response));
+        Log.i("ReviewResponse", valueOf(response));
     }
 
 
     @Override
     public void error(ErrorApi errorApi) {
-        Log.i("ErrorApi", String.valueOf(errorApi));
+        Log.i("ErrorApi", valueOf(errorApi));
     }
 
 
@@ -188,6 +196,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
         Log.d(LOG_TAG, "Starting activity");
         Intent intent = new Intent(this, DetailActivity.class);
         intent.putExtra(DetailActivity.EXTRA_MOVIE, movie);
+
 
         this.startActivity(intent);
 

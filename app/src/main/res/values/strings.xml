@@ -3,4 +3,9 @@
     //ApiKey
     <string name="api_key" templateMergeStrategy="preserve">c0ce143817426b86ae199a8ede8d8775</string>
     <string name="hello_world">Hello World!!!!</string>
+    <string name="subject_prefix_share_action">Enjoy this!</string>
+    <string name="title_share_action">Share video</string>
+    <string name="no_trailer_share_actiton">Nothing to share</string>
+    <string name="popular">Popular</string>
+    <string name="rated">Rated</string>
 </resources>

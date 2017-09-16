@@ -104,7 +104,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         public void onClick(View view) {
             int position = getLayoutPosition();
             Movie movie = mMovieList.get(position);
-            Toast.makeText(context, title.getText(), Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(context, title.getText(), Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(context, DetailActivity.class);
             intent.putExtra(DetailActivity.EXTRA_MOVIE, movie);
