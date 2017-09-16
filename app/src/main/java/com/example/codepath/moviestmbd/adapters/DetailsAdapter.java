@@ -28,6 +28,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import static android.content.ContentValues.TAG;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
@@ -107,6 +108,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 HeadViewHolder headViewHolder = (HeadViewHolder) holder;
                 Picasso.with(headViewHolder.poster.getContext())
                         .load(mMovie.getPosterUrl())
+                        .transform(new RoundedCornersTransformation(20,20))
                         .placeholder(R.drawable.ic_local_movies_gray)
                         .into(headViewHolder.poster);
 

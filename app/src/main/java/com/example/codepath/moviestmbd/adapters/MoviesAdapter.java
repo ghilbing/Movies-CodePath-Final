@@ -21,6 +21,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 
 import static java.util.Collections.addAll;
@@ -93,6 +94,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         int screenWith = context.getResources().getDisplayMetrics().widthPixels;
         Picasso.with(movieViewHolder.poster.getContext())
                 .load(movie.getPosterUrl(screenWith))
+                .transform(new RoundedCornersTransformation(20,20))
                 .placeholder(R.drawable.ic_local_movies_gray)
                 .into(movieViewHolder.poster);
         movieViewHolder.title.setText(movie.getTitle());
