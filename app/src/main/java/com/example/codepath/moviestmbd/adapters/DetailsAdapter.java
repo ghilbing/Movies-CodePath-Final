@@ -103,7 +103,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 headViewHolder.rating.setText("" + mMovie.getVoteAverage());
                 headViewHolder.synopsis.setText(mMovie.getOverview());
                 headViewHolder.release.setText(mMovie.getReleaseDate());
-                headViewHolder.genres.setText(TextUtils.join(", ", mMovie.getMovieGenres()).toUpperCase());
+
                 break;
 
             case TRAILER:
@@ -154,8 +154,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView release;
         @Bind(R.id.movie_detail_synopsis)
         TextView synopsis;
-        @Bind(R.id.movie_genres)
-        TextView genres;
+
 
         public HeadViewHolder(View itemView){
             super(itemView);

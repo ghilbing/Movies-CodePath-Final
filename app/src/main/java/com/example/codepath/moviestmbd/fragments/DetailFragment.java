@@ -89,6 +89,7 @@ public class DetailFragment extends Fragment implements MovieApiDB.ReviewListene
             movieApiDB.requestVideos(mMovie.getId(), this);
 
 
+
         }
 
         return view;
@@ -115,4 +116,5 @@ public class DetailFragment extends Fragment implements MovieApiDB.ReviewListene
         Log.e(TAG, "Error retrieving data from API: " + error.getReason());
 
     }
+
 }
