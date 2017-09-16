@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
     ImageView backdrop;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    @Bind(R.id.toolbar_layout)
+    @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout toolbarLayout;
     @Nullable
     @Bind(R.id.movie_detail_release)

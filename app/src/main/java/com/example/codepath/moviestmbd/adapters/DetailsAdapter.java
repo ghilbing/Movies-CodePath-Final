@@ -48,7 +48,8 @@ public class DetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     List<Review> reviews = new ArrayList<>();
     List<Video> videos = new ArrayList<>();
 
-    public DetailsAdapter(Context context) {
+    public DetailsAdapter(Context context, Movie movie) {
+        this.mMovie = movie;
         this.context = context;
     }
 
@@ -182,6 +183,7 @@ public class DetailsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         @OnClick({R.id.view_play_button, R.id.video_name})
         public void playTrailer(View v) {
             Uri url = videos.get(getAdapterPosition() - 1).getYoutubeURL();
+            String key = videos.get(getAdapterPosition() -1).getKey();
             Log.d(TAG, "Play url: " + url);
             context.startActivity(new Intent(Intent.ACTION_VIEW, url));
         }
