@@ -34,14 +34,15 @@ The following **additional** features are implemented:
 
 * [x] List anything else that you can get done to improve the app functionality!
 I used 
-RecyclerView, 
-Fragments, 
-Heterogeneous RecyclerView in DetailActivity, 
-Share Option, 
-Sort by Popularity and Highest Rated,
-Two Panel mode,
-Retrofit
-Network connection validation
+
+* [x] RecyclerView, 
+* [x] Fragments, 
+* [x] Heterogeneous RecyclerView in DetailActivity, 
+* [x] Share Option, 
+* [x] Sort by Popularity and Highest Rated,
+* [x] Two Panel mode,
+* [x] Retrofit
+* [x] Network connection validation
 
 
 
