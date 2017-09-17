@@ -2,6 +2,7 @@ package com.example.codepath.moviestmbd.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentTransaction;
@@ -27,6 +28,7 @@ import com.example.codepath.moviestmbd.rest.VideoResponse;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static java.lang.String.valueOf;
 
@@ -173,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
         if (isTwoPane) {
             DetailFragment fragment = (DetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_detail_container);
 
+
             if (fragment != null & selection == null) {
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.remove(fragment).commit();
@@ -184,9 +187,10 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
 
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_detail_container, fragment, TAG_DETAIL).commit();
-                if (view != null) {
-                    ft.addSharedElement(view, getResources().getString(R.string.transitionPoster));
-                }
+
+                /*if (view != null) {
+                    ft.addSharedElement(view, getResources().getString(R.string.transition_poster));
+                }*/
             }
 
                 String title = selection == null ? "" : selection.getTitle();
@@ -205,17 +209,33 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
     }
 
 
+
     public void onMovieClicked(Movie movie, boolean onClick, Object view) {
-        Log.d(LOG_TAG, "Starting activity");
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.EXTRA_MOVIE, movie);
 
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, (View) view, getResources().getString(R.string.transitionPoster));
-        ActivityCompat.startActivity(this, intent, options.toBundle());
+        if (isTwoPane) {
+            MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_main_container);
+            mainFragment.removeMovie(mSelectedMovie);
 
 
-       // this.startActivity(intent);
+        } else {
+
+            Log.d(LOG_TAG, "Starting activity");
+            Intent intent = new Intent(this, DetailActivity.class);
+            intent.putExtra(DetailActivity.EXTRA_MOVIE, movie);
+
+            startActivity(intent);
+
+            //ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, (View) view, getResources().getString(R.string.transition_poster));
+            //ActivityCompat.startActivity(this, intent, options.toBundle());
+
+
+            // this.startActivity(intent);
+        }
 
     }
+
+    
+
+
 
 }

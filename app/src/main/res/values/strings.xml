@@ -9,7 +9,7 @@
     <string name="no_trailer_share_actiton">Nothing to share</string>
     <string name="popular">Popular</string>
     <string name="rated">Rated</string>
-    <string name="transitionPoster">transition_movie_poster</string>
+    <string name="transition_poster">transition_movie_poster</string>
     <string name="key_sort_method_current">sort.method.current</string>
     <string name="key_sort_method_pref">sort.method.pref</string>
     <string name="action_settings">Settings</string>

@@ -6,6 +6,7 @@
               android:orientation="vertical"
               android:layout_marginTop="8dp"
               android:paddingBottom="0dp"
+              android:background="@color/cardview_dark_background"
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="0dp"
@@ -17,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:textColor="@color/cardview_light_background"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:fontFamily="sans-serif-condensed"
         android:textStyle="normal"
@@ -26,6 +28,7 @@
     <TextView
         android:id="@+id/review_content"
         android:layout_width="match_parent"
+        android:textColor="@color/cardview_light_background"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.07"

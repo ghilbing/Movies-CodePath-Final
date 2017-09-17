@@ -5,6 +5,7 @@
               android:layout_height="wrap_content"
               android:orientation="horizontal"
               android:paddingBottom="8dp"
+              android:background="@color/cardview_dark_background"
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="8dp">
@@ -19,6 +20,7 @@
 
     <TextView
         android:id="@+id/video_name"
+        android:textColor="@color/cardview_light_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"

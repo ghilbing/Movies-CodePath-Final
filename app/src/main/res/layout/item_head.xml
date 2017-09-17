@@ -45,11 +45,13 @@
             android:layout_toRightOf="@+id/movie_star"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/hello_world"
+            android:textColor="@color/cardview_light_background"
             android:textAppearance="?android:textAppearanceLarge"
             android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/movie_detail_release"
+            android:textColor="@color/cardview_light_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/movie_detail_poster"
@@ -61,6 +63,7 @@
 
     <TextView
         android:id="@+id/movie_detail_synopsis"
+        android:textColor="@color/cardview_light_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-condensed"

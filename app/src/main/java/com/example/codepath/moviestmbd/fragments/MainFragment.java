@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -57,6 +58,11 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
 
     int mSortMethod = Sort.POP;
 
+    RecyclerScrollListener mScrollListener;
+
+    int mPageMax = 20;
+    int mPageSize = 20;
+
 
     MovieApiDB movieApiDB;
     MoviesAdapter mAdapter;
@@ -96,10 +102,12 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
 
 
 
-        mAdapter = new MoviesAdapter(getContext(), mMovie);
+        mAdapter = new MoviesAdapter(getContext(), mMovie, mRecyclerView, mListener);
+        mScrollListener = new RecyclerScrollListener();
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setData(movies);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        mRecyclerView.addOnScrollListener(mScrollListener);
 
 
 
@@ -169,6 +177,11 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
         }
     }
 
+    public void removeMovie(Movie movie) {
+        mAdapter.removeData(movie);
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         return true;
@@ -215,7 +228,14 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
     @Override
     public void success(MovieListResponse response) {
 
-       mAdapter.appendData(response.getMovies());
+        if(response.getPage() == 1){
+            int pageMax = (response.getTotalPages() < mPageMax) ? response.getTotalPages() : mPageMax;
+            mScrollListener.totalPages = pageMax;
+            mAdapter.setData(response.getMovies(), mPageSize, pageMax);
+        }else {
+
+            mAdapter.appendData(response.getMovies());
+        }
 
     }
 
@@ -236,6 +256,74 @@ public class MainFragment extends Fragment implements  MovieApiDB.MovieListener,
         ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
+    }
+
+    private void loadNextPage(int page) {
+        //Log.d(TAG, "Load page: " + page);
+
+        switch (mSortMethod) {
+            case Sort.POP:
+                movieApiDB.requestPopularMovies(page, this);
+                return;
+            case Sort.RAT:
+                movieApiDB.requestRatedMovies(page, this);
+                return;
+            default:
+                return;
+        }
+
+    }
+
+    class RecyclerScrollListener extends RecyclerView.OnScrollListener {
+        int currentPage;
+        int totalPages;
+        int previousTotal;
+        int visibleThreshold;
+        boolean loading;
+
+        public void init() {
+            currentPage = 1;
+            totalPages = 1;
+            previousTotal = 0;
+            visibleThreshold = 5;
+            loading = false;
+        }
+
+        public RecyclerScrollListener() {
+            super();
+            init();
+        }
+
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+        }
+
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+
+            LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+            int visibleItemCount = recyclerView.getChildCount();
+            //int totalItemCount = linearLayoutManager.getItemCount();
+            int totalItemCount = mAdapter.mMovieList.size();
+            int firstVisibleItem = linearLayoutManager.findFirstVisibleItemPosition();
+
+            // load finished
+            if (loading && totalItemCount > previousTotal) {
+                loading = false;
+                previousTotal = totalItemCount;
+                currentPage++;
+            }
+
+            // load more data when near end of scroll view (within threshold)
+            if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
+                if (currentPage < totalPages) {
+                    loadNextPage(currentPage + 1);
+                    loading = true;
+                }
+            }
+        }
     }
 
 
