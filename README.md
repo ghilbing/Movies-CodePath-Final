@@ -41,6 +41,7 @@ Share Option,
 Sort by Popularity and Highest Rated,
 Two Panel mode,
 Retrofit
+Network connection validation
 
 
 
