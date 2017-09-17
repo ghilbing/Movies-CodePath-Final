@@ -49,7 +49,7 @@ Retrofit
 
 Here's a walkthrough of implemented user stories:
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/cMa3Z"><a href="//imgur.com/cMa3Z"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script> />
+<img src='http://i.imgur.com/cMa3Z.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
