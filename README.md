@@ -49,7 +49,7 @@ Retrofit
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/cMa3Z.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/8r5t3dh.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
