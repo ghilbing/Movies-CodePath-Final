@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,9 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.codepath.moviestmbd.R;
@@ -30,14 +25,12 @@ import com.example.codepath.moviestmbd.rest.ErrorApi;
 import com.example.codepath.moviestmbd.rest.MovieApiDB;
 import com.example.codepath.moviestmbd.rest.ReviewResponse;
 import com.example.codepath.moviestmbd.rest.VideoResponse;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static android.R.attr.description;
 import static android.content.ContentValues.TAG;
 
 /**

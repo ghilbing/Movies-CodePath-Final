@@ -1,15 +1,11 @@
 package com.example.codepath.moviestmbd.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -17,30 +13,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.codepath.moviestmbd.R;
-import com.example.codepath.moviestmbd.adapters.MoviesAdapter;
 import com.example.codepath.moviestmbd.fragments.DetailFragment;
 import com.example.codepath.moviestmbd.fragments.MainFragment;
-
 import com.example.codepath.moviestmbd.model.Movie;
-import com.example.codepath.moviestmbd.model.Review;
 import com.example.codepath.moviestmbd.rest.ErrorApi;
 import com.example.codepath.moviestmbd.rest.MovieApiDB;
 import com.example.codepath.moviestmbd.rest.MovieListResponse;
 import com.example.codepath.moviestmbd.rest.MovieResponse;
 import com.example.codepath.moviestmbd.rest.ReviewResponse;
 import com.example.codepath.moviestmbd.rest.VideoResponse;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
-import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 import static java.lang.String.valueOf;
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnMovieListener,
@@ -94,6 +81,27 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnMo
         movieApiDB.requestReviews(211672, this);
         movieApiDB.requestVideos(211672, this);
 
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id){
+            case R.id.action_settings:{
+                startActivity(new Intent(this, Settings.class));
+                return true;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
 
     }
 

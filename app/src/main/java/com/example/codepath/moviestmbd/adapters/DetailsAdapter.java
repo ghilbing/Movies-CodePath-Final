@@ -1,11 +1,9 @@
 package com.example.codepath.moviestmbd.adapters;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.codepath.moviestmbd.R;
-import com.example.codepath.moviestmbd.activities.DetailActivity;
 import com.example.codepath.moviestmbd.activities.YTPlayerActivity;
 import com.example.codepath.moviestmbd.model.Movie;
 import com.example.codepath.moviestmbd.model.Review;
@@ -31,9 +28,6 @@ import butterknife.OnClick;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 import static android.content.ContentValues.TAG;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
-import static android.media.CamcorderProfile.get;
-import static android.os.Build.VERSION_CODES.M;
 
 /**
  * Created by gretel on 9/13/17.
