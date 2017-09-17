@@ -59,6 +59,7 @@
                 android:layout_height="match_parent"
                 >
 
+
                 <FrameLayout
                     android:id="@+id/fragment_detail_container"
                     android:layout_width="fill_parent"

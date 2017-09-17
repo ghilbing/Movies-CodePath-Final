@@ -3,25 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/cardview_dark_background"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="3dp"
+    android:paddingTop="10dp">
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:padding="5dp"
-        tools:src="@drawable/ic_stars_black_24dp"/>
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|right"
-        android:padding="5dp"
-        tools:text="test"
-        android:textColor="@android:color/white"/>
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="0dp"
+        android:paddingTop="5dp"
+        tools:src="@drawable/ic_star_black_24dp"/>
 
 </LinearLayout>

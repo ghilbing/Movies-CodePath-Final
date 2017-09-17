@@ -7,4 +7,8 @@
     <color name="cardviewText">#ffffff</color>
     <color name="detailBackground">#757575</color>
     <color name="detailText">#eeeeee</color>
+    <color name="primary">#424242</color>
+    <color name="primary_dark">#212121</color>
+    <color name="primary_light">#eeeeee</color>
+    <color name="accent">#FF4081</color>
 </resources>

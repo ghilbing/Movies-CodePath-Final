@@ -29,6 +29,12 @@
             android:excludeFromRecents="true">
 
         </activity>
+
+        <activity android:name=".activities.Settings"
+            android:label="Settings"
+            android:theme="@style/SettingsTheme">
+
+        </activity>
     </application>
 
 </manifest>

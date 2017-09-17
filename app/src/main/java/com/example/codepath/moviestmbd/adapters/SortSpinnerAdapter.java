@@ -1,10 +1,13 @@
 package com.example.codepath.moviestmbd.adapters;
 
 import android.content.Context;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
@@ -27,6 +30,18 @@ public class SortSpinnerAdapter extends ArrayAdapter<Sort> implements SpinnerAda
         this.mainFragment = mainFragment;
     }
 
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent){
+        Sort option = getItem(position);
+        if(convertView == null){
+            convertView = mainFragment.getLayoutInflater(null).inflate(R.layout.sort_spinner_item, null);
+        }
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.icon);
+        imageView.setImageDrawable(ResourcesCompat.getDrawable(mainFragment.getResources(), option.getItemDrawable(), null));
+
+        return convertView;
+    }
+
   @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent){
       Sort option = getItem(position);
@@ -34,7 +49,9 @@ public class SortSpinnerAdapter extends ArrayAdapter<Sort> implements SpinnerAda
           convertView = mainFragment.getLayoutInflater(null).inflate(R.layout.sort_spinner_dropdown_item, null);
       }
 
+      ImageView imageView = (ImageView) convertView.findViewById(R.id.icon);
       TextView textView = (TextView) convertView.findViewById(R.id.text);
+      imageView.setImageDrawable(ResourcesCompat.getDrawable(mainFragment.getResources(), option.getDropdownDrawable(), null));
       textView.setText(option.getText());
 
       return convertView;
