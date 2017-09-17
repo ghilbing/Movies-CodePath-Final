@@ -63,9 +63,11 @@ It is the first time that I work with Fragments, RecyclerViews and YouTubePlayer
 - [Retrofit](com.squareup.retrofit:retrofit:1.9.0) - A type-safe HTTP client for Android and Java
 - [Okhttp](com.squareup.okhttp.:okhttp:2.4.0) - Third-party library for sending and receive HTTP network request
 - [Picasso](com.squareup.picasso:picasso:2.5.2) - Image loading and caching library for Android
+- [PicassoTransformations](jp.wasabeef:picasso-transformations:2.1.0) - Effects for images
 - [RecyclerView](com.android.support:recyclerview-v7:26.+) - A flexible view for providing a limited window into a large data set.
 - [CardView](com.android.support:cardview-v7:26.+) - UI component that shows information inside cards.
 - [Butterknife]:(com.jakewharton:butterknife:7.0.1 - Binding library
+
 
 
 
